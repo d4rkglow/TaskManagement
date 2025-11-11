@@ -1,0 +1,60 @@
+# --------------------
+# VISUAL STUDIO / .NET
+# --------------------
+# User-specific files
+*.user
+*.suo
+*.sln.docstates
+
+# Build Results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+
+# Packages and Dependencies
+*.nupkg
+/packages
+# Exclude the restore folder (if present)
+.vs/
+.history/
+
+# ASP.NET Core specific
+/wwwroot/lib/
+appsettings.Development.json # If this contains secrets
+
+# Deployment & Docker
+/artifacts
+/publish
+# Docker ignores for build stages
+!**/Dockerfile
+!**/.dockerignore
+.dockerignore
+.env.development.local # Local environment variables
+
+# --------------------
+# FRONTEND (React / Node)
+# --------------------
+/frontend/node_modules
+/frontend/dist
+/frontend/build
+/frontend/.vite
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment Variables
+/frontend/.env
+/frontend/.env.local
+/frontend/.env.*.local
+/frontend/.env.production.local
+/frontend/secrets.json
+
+# --------------------
+# MISCELLANEOUS
+# --------------------
+# OS generated files
+.DS_Store
+Thumbs.db
