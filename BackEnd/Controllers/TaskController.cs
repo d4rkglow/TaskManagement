@@ -65,7 +65,7 @@ namespace TaskManagement.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateTask(WorkTask newTask)
         {
-            if (newTask == null || newTask.Id != Guid.Empty)
+            if (newTask == null)
             {
                 return BadRequest("Invalid task data provided.");
             }
