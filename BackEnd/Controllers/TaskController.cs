@@ -82,10 +82,10 @@ namespace TaskManagement.Controllers
             }
         }
 
-        [HttpPut("EditDetails{id:guid}")]
+        [HttpPut("Edit{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> EditTaskDetails(Guid id, WorkTask task)
+        public async Task<IActionResult> EditTask(Guid id, WorkTask task)
         {
             if (id != task.Id)
             {
@@ -94,7 +94,7 @@ namespace TaskManagement.Controllers
 
             try
             {
-                bool success = await _taskService.UpdateTaskDetailsAsync(task);
+                bool success = await _taskService.UpdateTaskAsync(task);
 
                 if (!success)
                 {

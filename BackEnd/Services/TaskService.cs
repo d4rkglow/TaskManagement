@@ -57,7 +57,7 @@ namespace TaskManagement.Services
             }
         }
 
-        public async Task<bool> UpdateTaskDetailsAsync(WorkTask task)
+        public async Task<bool> UpdateTaskAsync(WorkTask task)
         {
             try
             {
@@ -67,6 +67,8 @@ namespace TaskManagement.Services
                 {
                     editTask.Title = task.Title;
                     editTask.Description = task.Description;
+                    editTask.Status = task.Status;
+                    editTask.Priority = task.Priority;
 
                     await _context.SaveChangesAsync();
                     return true;
