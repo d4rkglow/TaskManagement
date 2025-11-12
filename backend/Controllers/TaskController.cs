@@ -96,7 +96,7 @@ namespace TaskManagement.Controllers
         /// Updates all editable properties of an existing task.
         /// </summary>
         /// <param name="id">The ID of the task to update.</param>
-        /// <param name="taskDto">The updated task data.</param>
+        /// <param name="taskDto">The updated task data (title, description, status, priority).</param>
         /// <returns>A No Content response (204).</returns>
         [HttpPut("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
