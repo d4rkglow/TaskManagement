@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTaskContext } from '../../context/TaskContext';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import TaskCard from './TaskCard';
@@ -33,12 +33,14 @@ const TaskGrid = ({ onEditTask }) => {
         handleStatusChange(draggableId, destination.droppableId);
     };
 
-    const groupedTasks = tasks.reduce((acc, task) => {
-        const statusId = task.status;
-        if (!acc[statusId]) { acc[statusId] = []; }
-        acc[statusId].push(task);
-        return acc;
-    }, {});
+    const groupedTasks = useMemo(() => {
+        return tasks.reduce((acc, task) => {
+            const statusId = task.status;
+            if (!acc[statusId]) { acc[statusId] = []; }
+            acc[statusId].push(task);
+            return acc;
+        }, {});
+    }, [tasks]);
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
@@ -47,7 +49,9 @@ const TaskGrid = ({ onEditTask }) => {
                 gap: '20px', 
                 overflowX: 'auto', 
                 padding: '10px 0',
-                backgroundColor: '#eee'
+                backgroundColor: '#eee',
+                width: '100%',
+                WebkitOverflowScrolling: 'touch',
             }}>
                 {Object.keys(STATUSES).map(statusKey => {
                     const status = STATUSES[statusKey];
@@ -59,8 +63,10 @@ const TaskGrid = ({ onEditTask }) => {
                                 <div 
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
-                                    style={{ 
+                                    style={{
                                         flex: '0 0 320px', 
+                                        maxWidth: '90vw', 
+                                        minWidth: '280px',
                                         backgroundColor: snapshot.isDraggingOver ? '#e0e0e0' : '#f4f5f7',
                                         borderRadius: '5px',
                                         padding: '10px',

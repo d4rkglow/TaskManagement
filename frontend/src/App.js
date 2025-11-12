@@ -39,12 +39,12 @@ function App() {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Task Manager Dashboard</h1>
+    <div style={{ padding: '20px 2vw', maxWidth: '1400px', margin: '0 auto' }}> 
+      <h1 style={{ fontSize: '2em', textAlign: 'center', marginBottom: '15px' }}>Task Manager Dashboard</h1>
 
       <button 
         onClick={handleOpenCreateModal} 
-        style={{ marginBottom: '20px', padding: '10px 15px', cursor: 'pointer' }}
+        style={{ marginBottom: '20px', padding: '10px 15px', cursor: 'pointer', width: '100%', maxWidth: '300px', display: 'block' }}
       >
         + Add New Task
       </button>

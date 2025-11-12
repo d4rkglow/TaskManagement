@@ -97,10 +97,10 @@ const TaskForm = ({ onClose, initialTask }) => {
                     style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
                 />
             </div>
-            <div style={{ marginBottom: '20px', display: 'flex', gap: '20px' }}>
-                <div>
+            <div style={{ marginBottom: '20px', display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                <div style={{ flex: 1, minWidth: '150px' }}>
                     <label>Status:</label>
-                    <select name="status" value={formData.status} onChange={handleChange}>
+                    <select name="status" value={formData.status} onChange={handleChange} style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}>
                         {STATUS_OPTIONS.map(option => (
                             <option key={option.value} value={option.value}>
                                 {option.label}
@@ -108,9 +108,9 @@ const TaskForm = ({ onClose, initialTask }) => {
                         ))}
                     </select>
                 </div>
-                <div>
+                <div style={{ flex: 1, minWidth: '150px' }}>
                     <label>Priority:</label>
-                    <select name="priority" value={formData.priority} onChange={handleChange}>
+                    <select name="priority" value={formData.priority} onChange={handleChange} style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}>
                         {PRIORITY_OPTIONS.map(option => (
                             <option key={option.value} value={option.value}>
                                 {option.label}
@@ -120,7 +120,7 @@ const TaskForm = ({ onClose, initialTask }) => {
                 </div>
             </div>
             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
-                <div>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     <button type="submit" disabled={loading} style={{ padding: '8px 15px' }}>
                         {loading ? (isEditMode ? 'Updating...' : 'Saving...') : (isEditMode ? 'Update Task' : 'Save Task')}
                     </button>
