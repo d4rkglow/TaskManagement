@@ -19,7 +19,7 @@ namespace TaskManagementAPI.Models.DTOs
         /// The description of the task (max 500 chars).
         /// </summary>
         [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The task status (0 - New, 1 - Active, 2 - Resolved, 3 - Closed).
@@ -50,7 +50,7 @@ namespace TaskManagementAPI.Models.DTOs
         /// The description of the task (max 500 chars).
         /// </summary>
         [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The task status (0 - New, 1 - Active, 2 - Resolved, 3 - Closed).
