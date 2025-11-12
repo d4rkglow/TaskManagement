@@ -5,33 +5,36 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: task-manager-sql
     environment:
-      # Use a secure password for production!
       SA_PASSWORD: "YourStrongPassword123!" 
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer" 
     ports:
-      # Expose 1433 on the host for external tools (like SSMS)
       - "1433:1433" 
     volumes:
-      # Named volume for persistent database storage
       - sqlserver_data:/var/opt/mssql 
 
   backend:
-    # Build context points to the folder containing your Dockerfile and .csproj
     build: 
       context: ./backend 
       dockerfile: Dockerfile
     container_name: task-manager-api
     ports:
-      # Expose API on host port 8080 (client access) to container port 8080 (from Dockerfile EXPOSE)
       - "8080:8080" 
     depends_on:
-      - sqldb # Ensures the database starts before the API tries to connect
+      - sqldb
     environment:
-      # IMPORTANT: Use 'sqldb' (the service name) as the server hostname for internal communication
       ConnectionStrings__DefaultConnection: "Server=sqldb,1433;Database=TaskDb;User Id=sa;Password=YourStrongPassword123!;Encrypt=False;TrustServerCertificate=True"
-      # Set ASP.NET Core environment variable for port configuration
       ASPNETCORE_URLS: http://+:8080
+      
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: task-manager-frontend
+    ports:
+      - "3000:80" 
+    depends_on:
+      - backend
 
 volumes:
   sqlserver_data:

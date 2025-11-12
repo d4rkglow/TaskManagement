@@ -45,7 +45,7 @@ export const updateTaskStatus = async (taskId, status) => {
   try {
     const response = await apiClient.patch(`/Task/EditStatus${taskId}/status`, null, {
       params: {
-        status: status // Pass the status variable as a query parameter (?status=1)
+        status: status
       }
     }); 
     return response.data; 
