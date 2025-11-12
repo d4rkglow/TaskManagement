@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { getTasks, createTask, updateTask, deleteTask } from '../api/taskService';
+import { getTasks, createTask, updateTask, updateTaskStatus, deleteTask } from '../api/taskService';
 
 const TaskContext = createContext();
 
@@ -48,6 +48,19 @@ export const TaskProvider = ({ children }) => {
         }
     };
 
+    const editTaskStatus = async (taskId, status) => {
+        try {
+            await updateTaskStatus(taskId, status);
+
+            await refreshTasks();
+
+            return;
+        } catch (err) {
+            console.error("Failed to add task:", err);
+            throw err;
+        }
+    };
+
     const removeTask = async (taskId) => {
         try {
             await deleteTask(taskId);
@@ -76,6 +89,7 @@ export const TaskProvider = ({ children }) => {
         error,
         addTask,
         editTask,
+        editTaskStatus,
         removeTask,
     };
 

@@ -41,6 +41,20 @@ export const updateTask = async (taskId, taskData) => {
   }
 };
 
+export const updateTaskStatus = async (taskId, status) => {
+  try {
+    const response = await apiClient.patch(`/Task/EditStatus${taskId}/status`, null, {
+      params: {
+        status: status // Pass the status variable as a query parameter (?status=1)
+      }
+    }); 
+    return response.data; 
+  } catch (error) {
+    console.error(`Error updating task ${taskId}:`, error.response?.data || error.message);
+    throw error;
+  }
+};
+
 export const deleteTask = async (taskId) => {
   try {
     await apiClient.delete(`/Task/Delete${taskId}`);
