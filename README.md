@@ -7,8 +7,11 @@ This project is a complete Task Management Dashboard built using a modern full-s
 Technology Stack
 
 | Frontend | React | Single Page Application (SPA) for the task management board and task forms, featuring drag-and-drop functionality. |
+
 | Backend API | ASP.NET Core Web API (C#) | RESTful API handling task logic, persistence, and data validation via DTOs and Data Annotations. |
+
 | Containerization | Docker & Docker Compose | Used to build and orchestrate the multi-container application stack. |
+
 | API Docs | Swagger/OpenAPI | Auto-generated, interactive documentation for all backend endpoints. |
 
 ---
@@ -34,4 +37,5 @@ Access Points
 Once the services are running, you can access the application and documentation via these local endpoints:
 
 | Frontend Dashboard (UI) | http://localhost:3000 |
+
 | Backend API Documentation | http://localhost:8080/swagger |
