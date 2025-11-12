@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Reflection;
 using TaskManagement.Data;
 using TaskManagement.Interfaces;
 using TaskManagement.Services;
@@ -11,21 +12,30 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(options =>
 {
-    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Description = "API Key authorization header, Example: 'X-API-KEY <your_key>'",
-        Name = "X-API-KEY",
+        Title = "Task Management API",
+        Version = "v1",
+        Description = "An API for managing tasks, supporting creation, status updates, and deletion."
+    });
+
+    options.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    {
         In = ParameterLocation.Header,
+        Name = "X-API-KEY",
         Type = SecuritySchemeType.ApiKey
     });
 
-    var scheme = new OpenApiSecurityScheme
-    {
-        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "ApiKey" }
-    };
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement { { scheme, Array.Empty<string>() } });
+    var requirement = new OpenApiSecurityRequirement { {
+        new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "ApiKey" } },
+        new string[] { }
+    } };
+    options.AddSecurityRequirement(requirement);
 });
 
 builder.Services.AddDbContext<TaskDbContext>(options =>

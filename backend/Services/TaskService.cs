@@ -2,6 +2,7 @@
 using TaskManagement.Data;
 using TaskManagement.Interfaces;
 using TaskManagement.Models;
+using TaskManagementAPI.Models.DTOs;
 
 namespace TaskManagement.Services
 {
@@ -42,10 +43,19 @@ namespace TaskManagement.Services
             }
         }
 
-        public async Task<WorkTask> CreateTaskAsync(WorkTask newTask)
+        public async Task<WorkTask> CreateTaskAsync(TaskCreateDto taskDto)
         {
             try
             {
+                var newTask = new WorkTask()
+                {
+                    Title = taskDto.Title,
+                    Description = taskDto.Description,
+                    Status = taskDto.Status,
+                    Priority = taskDto.Priority,
+                    Date = DateTime.UtcNow
+                };
+
                 _context.Tasks.Add(newTask);
                 await _context.SaveChangesAsync();
                 return newTask;
@@ -57,7 +67,7 @@ namespace TaskManagement.Services
             }
         }
 
-        public async Task<bool> UpdateTaskAsync(WorkTask task)
+        public async Task<bool> UpdateTaskAsync(TaskUpdateDto task)
         {
             try
             {

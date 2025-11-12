@@ -2,9 +2,11 @@
 {
     public class WorkTask
     {
+        public WorkTask() { }
+
         public WorkTask(string title) { 
             Title = title;
-            Date = DateTime.Now;
+            Date = DateTime.UtcNow;
             Status = StatusType.New;
             Priority = PriorityType.Normal;
         }

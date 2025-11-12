@@ -23,7 +23,7 @@ export const getTasks = async () => {
 
 export const createTask = async (taskData) => {
   try {
-    const response = await apiClient.post('Task/New', taskData); 
+    const response = await apiClient.post('Task', taskData); 
     return response.data;
   } catch (error) {
     console.error("Error creating task:", error);
@@ -33,7 +33,7 @@ export const createTask = async (taskData) => {
 
 export const updateTask = async (taskId, taskData) => {
   try {
-    const response = await apiClient.put(`/Task/Edit${taskId}`, taskData); 
+    const response = await apiClient.put(`/Task/${taskId}`, taskData); 
     return response.data; 
   } catch (error) {
     console.error(`Error updating task ${taskId}:`, error);
@@ -43,21 +43,21 @@ export const updateTask = async (taskId, taskData) => {
 
 export const updateTaskStatus = async (taskId, status) => {
   try {
-    const response = await apiClient.patch(`/Task/EditStatus${taskId}/status`, null, {
+    const response = await apiClient.patch(`/Task/${taskId}/status`, null, {
       params: {
         status: status
       }
     }); 
     return response.data; 
   } catch (error) {
-    console.error(`Error updating task ${taskId}:`, error.response?.data || error.message);
+    console.error(`Error updating task status ${taskId}:`, error.response?.data || error.message);
     throw error;
   }
 };
 
 export const deleteTask = async (taskId) => {
   try {
-    await apiClient.delete(`/Task/Delete${taskId}`);
+    await apiClient.delete(`/Task/${taskId}`);
     return true;
   } catch (error) {
     console.error(`Error deleting task ${taskId}:`, error);
